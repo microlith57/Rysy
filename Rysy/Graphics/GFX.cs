@@ -32,7 +32,7 @@ public static class Gfx {
     /// <summary>
     /// Loads the bare minimum needed to render anything.
     /// </summary>
-    public static void LoadEssencials() {
+    public static void LoadEssentials() {
         if (Batch is not null)
             return;
 

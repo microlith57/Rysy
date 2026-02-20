@@ -97,7 +97,7 @@ public sealed class RysyEngine : Game {
     public static void QueueReload() {
         RysyState.OnEndOfThisFrame += () => {
             lock (Instance) {
-                Gfx.LoadEssencials();
+                Gfx.LoadEssentials();
                 //Scene = new LoadingScene();
             }
 
@@ -135,10 +135,10 @@ public sealed class RysyEngine : Game {
             }),
         ]);
 
-        Logger.Write("Reload", LogLevel.Info, $"Staring full reload...");
+        Logger.Write("Reload", LogLevel.Info, $"Starting full reload...");
         
         lock (this) {
-            Gfx.LoadEssencials();
+            Gfx.LoadEssentials();
             Scene = new LoadingScene(loadTasks, onCompleted: () => {
 
             });
