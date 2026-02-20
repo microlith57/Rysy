@@ -33,9 +33,18 @@ public class Linux : RysyPlatform {
             return _fontFilesystem;
 
         _fontFilesystem = new LayeredFilesystem();
-        _fontFilesystem.AddFilesystem(new FolderModFilesystem("/usr/share/fonts"), "/usr/share/fonts");
-        _fontFilesystem.AddFilesystem(new FolderModFilesystem("/usr/local/share/fonts"), "/usr/local/share/fonts");
-        
+
+        void AddIfExists(string path) {
+            if (Path.Exists(path))
+                _fontFilesystem!.AddFilesystem(new FolderModFilesystem(path), path);
+        }
+
+        AddIfExists("/usr/share/fonts");
+        AddIfExists("/usr/local/share/fonts");
+
+        // NixOS does not have /usr/share or /usr/local; but by enabling fonts.fontDir.enable this directory can be used:
+        AddIfExists("/run/current-system/sw/share/X11/fonts");
+
         return _fontFilesystem;
     }
 }
